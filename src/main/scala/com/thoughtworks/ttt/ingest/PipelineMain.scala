@@ -59,7 +59,7 @@ object PipelineMain {
 
     val initErrors = spark.emptyDataset[DataError]
 
-    /*val pipelineStages = List(
+    val pipelineStages = List(
       new AddRowKeyStage(dataCols),
       new DataTypeValidatorStage(dataCols)
     )
@@ -67,14 +67,6 @@ object PipelineMain {
 
     val (errors, processedDf) = pipelineStages.foldLeft(init) { case ((accumErr, df), stage) =>
       stage(accumErr, df)
-    }*/
-
-
-    val (errors, processedDf) = {
-      val (addErr, addDf) = new AddRowKeyStage(dataCols).apply(initErrors, sourceRawDf)
-      val (validErr, validDf) = new DataTypeValidatorStage(dataCols).apply(addErr, addDf)
-
-      (validErr, validDf)
     }
 
     processedDf.show(false)
