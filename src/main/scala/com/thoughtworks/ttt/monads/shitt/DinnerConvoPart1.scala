@@ -24,4 +24,6 @@ object DinnerConvoPart1 extends App {
   println (s"Mumblings: $mumblings")
   println (s"Final result: $finalResult")
 
+  //Hint: Magic?
+
 }
