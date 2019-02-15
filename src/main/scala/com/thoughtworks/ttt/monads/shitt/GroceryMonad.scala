@@ -29,16 +29,27 @@ object GroceryMonad extends App {
       }
     }
 
+  println (s"First $first")
 
-  val second =
+  //TODO secondMonad
+
+}
+
+
+
+
+
+/*import scala.reflect.runtime.universe._
+
+val result = show{
+  reify{
     for {
       m <- getMothersStuff("chocolates")
       f <- getFathersStuff("shaving")
       k <- getKidsStuff("pencil")
     } yield Option(s"$m, $f, $k")
 
-
-  println (s"First $first")
-
-  println (s"Second $second")
+  }
 }
+
+println (result)*/
