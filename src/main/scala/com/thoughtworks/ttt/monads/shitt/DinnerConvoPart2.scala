@@ -1,10 +1,9 @@
 package com.thoughtworks.ttt.monads.shitt
 
-package com.thoughtworks.ttt.monads.shitt
-
+import cats.Semigroup
 import cats.data.Writer
 //import cats.kernel.Semigroup
-import cats.implicits.catsKernelStdMonoidForString
+//import cats.implicits.catsKernelStdMonoidForString
 
 object DinnerConvoPart2 extends App {
 
@@ -31,6 +30,7 @@ object DinnerConvoPart2 extends App {
   println (s"Mumblings: $mumblings")
   println (s"Final result: $finalResult")
 
+  //Hint: Show the presentation
 
 
 
