@@ -27,6 +27,5 @@ object ErrorModels {
     )
   }
 
-  type DataSetWithErrors[T] = Writer[Dataset[DataError], T]
-
+  //TODO
 }
