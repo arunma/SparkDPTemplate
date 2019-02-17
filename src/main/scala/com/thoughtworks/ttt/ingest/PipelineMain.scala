@@ -57,10 +57,14 @@ object PipelineMain {
 
     val dataCols = dataSetConfig.columns
 
+    val addRowKeyStage = new AddRowKeyStage(dataCols)
+    val dTypeValidatorStage = new DataTypeValidatorStage(dataCols)
+
     val pipelineStages = List(
-      new AddRowKeyStage(dataCols),
-      new DataTypeValidatorStage(dataCols)
+      addRowKeyStage,
+      dTypeValidatorStage
     )
+
     val init = (spark.emptyDataset[DataError], sourceRawDf)
 
     val (errors, processedDf) = pipelineStages.foldLeft(init) { case ((accumErr, df), stage) =>

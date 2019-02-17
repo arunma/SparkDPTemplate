@@ -61,7 +61,7 @@ object UDFs {
     }
 
     val indexRange = 1 to columns.length
-    val errorList = columns.tail.zip(indexRange).zip(columns).foldLeft(Seq[DataError]()) { case (errors, ((column, index), colConfig)) => CatalystSqlParser.parseDataType(column.dType) match {
+    val errorList = columns.zip(indexRange).zip(columns).foldLeft(Seq[DataError]()) { case (errors, ((column, index), colConfig)) => CatalystSqlParser.parseDataType(column.dType) match {
       case StringType => errors
       case dataType@ (DoubleType | IntegerType | LongType | FloatType | BooleanType | DateType | TimestampType) =>
         val errorOpt = validateDataTypes(row, dataType, colConfig, index)
