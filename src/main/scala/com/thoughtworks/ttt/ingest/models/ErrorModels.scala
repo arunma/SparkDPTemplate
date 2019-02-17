@@ -5,7 +5,15 @@ import org.apache.spark.sql.{Dataset, Row}
 
 object ErrorModels {
 
-  case class DataError(rowKey: String, stage: String, fieldName: String, fieldValue: String, error: String, severity: String, addlInfo: String = "")
+  case class DataError(
+                        rowKey: String,
+                        stage: String,
+                        fieldName: String,
+                        fieldValue: String,
+                        error: String,
+                        severity: String,
+                        addlInfo: String = ""
+                      )
 
   object DataError{
     def apply(row: Row): DataError = new DataError(

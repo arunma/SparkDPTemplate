@@ -57,8 +57,6 @@ object PipelineMain {
 
     val dataCols = dataSetConfig.columns
 
-    val initErrors = spark.emptyDataset[DataError]
-
     val pipelineStages = List(
       new AddRowKeyStage(dataCols),
       new DataTypeValidatorStage(dataCols)
