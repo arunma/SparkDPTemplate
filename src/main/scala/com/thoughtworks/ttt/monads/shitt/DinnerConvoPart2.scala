@@ -3,7 +3,7 @@ package com.thoughtworks.ttt.monads.shitt
 import cats.Semigroup
 import cats.data.Writer
 //import cats.kernel.Semigroup
-//import cats.implicits.catsKernelStdMonoidForString
+import cats.implicits.catsKernelStdMonoidForString
 
 object DinnerConvoPart2 extends App {
 

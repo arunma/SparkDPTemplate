@@ -1,18 +1,24 @@
 package com.thoughtworks.ttt.monads.shitt
 
-import cats.data.Writer
+import cats.data.{Writer}
+import cats.kernel.Semigroup
 import cats.implicits.catsKernelStdMonoidForList
 
 object DinnerConvoPart1 extends App {
 
   def getHusbandConvo(decentFood: String): Writer[List[String], String] =
-    Writer(List("This is food?", "God, take me already!"), "Could you pass me the salt?")
-
+    Writer(
+      List("The Food is terrible!", "God, take me already!"), //Log part
+      "Could you pass me the salt?"                           //Value part
+    )
 
   def getWifeConvo(saltyRequest: String): Writer[List[String], String] =
-    Writer(List("Idiot!"), "It's right there beside you")
+    Writer(
+      List("Idiot!"),
+      "It's right there beside you"
+    )
 
-  val convoWriter =
+  val convoWriter: Writer[List[String], String] =
     for {
       saltyRequest      <-      getHusbandConvo("Pasta")
       thereYouGo        <-      getWifeConvo(saltyRequest)
