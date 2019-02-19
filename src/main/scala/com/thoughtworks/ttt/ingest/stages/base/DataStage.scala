@@ -1,6 +1,6 @@
 package com.thoughtworks.ttt.ingest.stages.base
 
-import com.thoughtworks.ttt.ingest.models.ErrorModels.{DataError, DataSetWithErrors}
+import com.thoughtworks.ttt.ingest.models.ErrorModels.{DataError}
 import org.apache.spark.sql.Dataset
 
 trait DataStage[T <: Dataset[_]] extends Serializable {

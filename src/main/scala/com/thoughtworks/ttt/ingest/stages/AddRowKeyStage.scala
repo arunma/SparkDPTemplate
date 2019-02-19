@@ -4,7 +4,7 @@ import cats.data.Writer
 import com.thoughtworks.ttt.config.PipelineConfig.DataColumn
 import com.thoughtworks.ttt.ingest.StageConstants._
 import com.thoughtworks.ttt.ingest.UDFs.generateUUID
-import com.thoughtworks.ttt.ingest.models.ErrorModels.{DataError, DataSetWithErrors}
+import com.thoughtworks.ttt.ingest.models.ErrorModels.{DataError}
 import com.thoughtworks.ttt.ingest.stages.base.DataStage
 import org.apache.spark.sql.functions._
 import org.apache.spark.sql.{DataFrame, Dataset, Encoder, SparkSession}

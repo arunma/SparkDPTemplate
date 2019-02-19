@@ -19,8 +19,8 @@ object GroceryMonad extends App {
 
   //Hint: Monads can be used for sequencing computations
   val first: Option[String] =
-    getFathersStuff("beer").flatMap { f =>
-      getMothersStuff("wine").flatMap { m =>
+    getFathersStuff("shaving").flatMap { f =>
+      getMothersStuff("chocolates").flatMap { m =>
         getKidsStuff("toy").flatMap { k =>
           Option(s"$f, $m, $k")
         }
