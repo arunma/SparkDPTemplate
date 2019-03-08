@@ -2,9 +2,14 @@ package com.thoughtworks.ttt.monads.shitt
 
 import cats.data.{Writer}
 import cats.kernel.Semigroup
-import cats.implicits.catsKernelStdMonoidForList
+//import cats.implicits.catsKernelStdMonoidForList
 
 object DinnerConvoPart1 extends App {
+
+
+  implicit def semiGroupList[A] = new Semigroup[List[A]] {
+    override def combine(x: List[A], y: List[A]): List[A] = x:::y
+  }
 
   def getHusbandConvo(decentFood: String): Writer[List[String], String] =
     Writer(

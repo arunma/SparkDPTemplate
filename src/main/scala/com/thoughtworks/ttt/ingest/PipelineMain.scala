@@ -67,9 +67,16 @@ object PipelineMain {
 
     val init = (spark.emptyDataset[DataError], sourceRawDf)
 
-    val (errors, processedDf) = pipelineStages.foldLeft(init) { case ((accumErr, df), stage) =>
+    /*val (errors, processedDf) = pipelineStages.foldLeft(init) { case ((accumErr, df), stage) =>
       stage(accumErr, df)
-    }
+    }*/
+
+    val finalOutputWithLogs = for {
+          add       <-    addRowKeyStage(sourceRawDf)
+          valid     <-    dTypeValidatorStage(add)
+        } yield valid
+
+    val (errors, processedDf) = finalOutputWithLogs.run
 
     processedDf.show(false)
     errors.show(false)

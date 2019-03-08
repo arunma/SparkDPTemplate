@@ -1,10 +1,12 @@
 package com.thoughtworks.ttt.ingest.stages
 
+import cats.data.Writer
 import com.thoughtworks.ttt.config.PipelineConfig.DataColumn
 import com.thoughtworks.ttt.ingest.StageConstants._
 import com.thoughtworks.ttt.ingest.UDFs.validateRowUDF
 import com.thoughtworks.ttt.ingest.models.ErrorModels.DataError
 import com.thoughtworks.ttt.ingest.stages.base.DataStage
+import com.thoughtworks.ttt.ingest.stages.base.DataStage.DatasetWithErrors
 import org.apache.spark.sql.functions._
 import org.apache.spark.sql.{DataFrame, Dataset, SparkSession}
 
@@ -12,7 +14,7 @@ class DataTypeValidatorStage(dataCols: List[DataColumn])(implicit val spark: Spa
 
   override val stage = getClass.getSimpleName
 
-  def apply(errors: Dataset[DataError], data: DataFrame): (Dataset[DataError], DataFrame) = {
+  def apply(data: DataFrame): DatasetWithErrors[DataFrame] = {
 
     val withErrorsDF = data.withColumn(RowLevelErrorListCol, validateRowUDF(dataCols, stage)(struct(data.columns.map(data(_)): _*)))
 
@@ -25,6 +27,6 @@ class DataTypeValidatorStage(dataCols: List[DataColumn])(implicit val spark: Spa
         .select("col.*")
         .map(row => DataError(row))
 
-    (errors.union(errorRecords), withErrorsDF.drop(RowLevelErrorListCol))
+    Writer(errorRecords, withErrorsDF.drop(RowLevelErrorListCol))
   }
 }

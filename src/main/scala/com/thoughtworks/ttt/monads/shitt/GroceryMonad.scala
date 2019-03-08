@@ -30,6 +30,14 @@ object GroceryMonad extends App {
   println (s"First $first")
 
   //TODO secondMonad
+    val second =
+      for {
+            m <- getMothersStuff("chocolates")
+            f <- getFathersStuff("shaving")
+            k <- getKidsStuff("toy")
+        } yield Option(s"$m, $f, $k")
+
+      println (s"Second $second")
 
 }
 
